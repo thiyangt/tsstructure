@@ -80,7 +80,7 @@ per selected feature, in addition to the series name.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">series</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  linear <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span>,</span></span>
 <span class="r-in"><span>  rand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  zigzag <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">2</span>, <span class="fl">6</span>, <span class="fl">3</span>, <span class="fl">7</span>, <span class="fl">4</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  zigzag <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">2</span>, <span class="fl">6</span>, <span class="fl">3</span>, <span class="fl">7</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  seasonal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">pi</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span> <span class="op">/</span> <span class="fl">12</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -91,7 +91,16 @@ per selected feature, in addition to the series name.</p>
 <span class="r-in"><span>  <span class="st">"randomness_ratio_loess"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Fitting terminated with step failure - check results carefully</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (sum(edf2) &gt; sum(edf1)) {    edf2 &lt;- edf1}:</span> missing value where TRUE/FALSE needed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     series max_abs_diff   sd_diff jump_score_sd detect_jumps_all detect_zigzag</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   linear     1.000000 0.0000000            NA                0     0.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     rand     3.217755 1.2846275      2.504815                3     0.5612245</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   zigzag     4.000000 2.0686278      1.933649                0     0.9523810</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 seasonal     0.500000 0.3646368      1.371227                3     0.1734694</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   jump_score_mean randomness_ratio_gam randomness_ratio_loess</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1          1.0000         4.175625e-32           2.793042e-31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       -335.7141         9.999988e-01           8.537437e-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3         17.6000         6.045546e-01           5.340411e-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4        135.2365         7.670788e-11           2.346738e-01</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
