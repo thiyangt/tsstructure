@@ -3,8 +3,15 @@
 <url><loc>/LICENSE.html</loc></url>
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
+<url><loc>/reference/detect_jumps_all.html</loc></url>
+<url><loc>/reference/detect_zigzag.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/jump_score_mean.html</loc></url>
+<url><loc>/reference/jump_score_sd.html</loc></url>
+<url><loc>/reference/max_abs_diff.html</loc></url>
 <url><loc>/reference/randomness_ratio_gam.html</loc></url>
 <url><loc>/reference/randomness_ratio_loess.html</loc></url>
+<url><loc>/reference/sd_diff.html</loc></url>
+<url><loc>/reference/tsstruct.html</loc></url>
 </urlset>
 
