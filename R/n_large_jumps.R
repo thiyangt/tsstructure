@@ -30,6 +30,7 @@
 #' automatically estimated threshold.
 #'
 #' @param y A numeric vector of time series observations.
+#' @scale scale parameter to control upper fence (q3 + scale * iqr_dev)
 #'
 #' @return A list containing the estimated threshold, jump positions,
 #'   and number of detected jumps. Positions refer to the observation
@@ -39,26 +40,26 @@
 #' y1 <- c(10, 11, 12, 13, 14, 25, 26)
 #' detect_jumps(y1)
 #' 
-#' y2 <- c(rnorm(100), rnorm(mean=50, n=100))
+#' y2 <- c(rnorm(100), rnorm(mean=3, n=100))
 #' detect_jumps(y2)
 #' n <- length(y2)
 #' t <- 1:n
 #' plot(y2~t, type="l")
 #' @export
-detect_jumps <- function(y) {
+detect_jumps <- function(y, scale=3) {
   if (!is.numeric(y) || length(y) < 3 ||
       anyNA(y) || any(!is.finite(y))) {
     stop("y must be a finite numeric vector of length at least 3.")
   }
   
-  deviations <- abs(diff(y))
- # deviations <- abs(d - stats::median(d))
+  d <- abs(diff(y))
+  deviations <- abs(d - stats::median(d))
   
- # q1 <- stats::quantile(deviations, 0.25, names = FALSE)
+  q1 <- stats::quantile(deviations, 0.25, names = FALSE)
   q3 <- stats::quantile(deviations, 0.75, names = FALSE)
   iqr_dev <- q3 - q1
   
-  threshold <- q3 + 1.5 * iqr_dev
+  threshold <- q3 + scale * iqr_dev
   
   # Handle zero-IQR cases
   if (iqr_dev == 0) {
