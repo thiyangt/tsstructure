@@ -1,4 +1,4 @@
-#' Count the Number of  Large Jumps
+#' Count the Number of Jumps
 #'
 #' Counts unusually large changes between consecutive observations
 #' using an automatically estimated threshold.
@@ -31,22 +31,23 @@
 #'
 #' @param y A numeric vector of time series observations.
 #' @scale scale parameter to control upper fence (q3 + scale * iqr_dev)
+#' @detailed If detailed true you will get locations of the jumps, number of jumps and threshold
 #'
-#' @return A list containing the estimated threshold, jump positions,
+#' @return If detailed=TRUE, A list containing the estimated threshold, jump positions,
 #'   and number of detected jumps. Positions refer to the observation
-#'   immediately after each detected jump.
+#'   immediately after each detected jump otherwise only number o jumps.
 #'
 #' @examples
 #' y1 <- c(10, 11, 12, 13, 14, 25, 26)
 #' detect_jumps(y1)
 #' 
 #' y2 <- c(rnorm(100), rnorm(mean=3, n=100))
-#' detect_jumps(y2)
+#' detect_jumps_all(y2)
 #' n <- length(y2)
 #' t <- 1:n
 #' plot(y2~t, type="l")
 #' @export
-detect_jumps <- function(y, scale=3) {
+detect_jumps_all <- function(y, scale=3, detailed=TRUE) {
   if (!is.numeric(y) || length(y) < 3 ||
       anyNA(y) || any(!is.finite(y))) {
     stop("y must be a finite numeric vector of length at least 3.")
@@ -75,9 +76,12 @@ detect_jumps <- function(y, scale=3) {
     jump_positions <- which(deviations > threshold)
   }
   
+  if(detailed=TRUE){
   list(
     threshold = threshold,
     jump_positions = jump_positions + 1L,
     n_jumps = length(jump_positions)
-  )
+  )} else{
+    n_jumps = length(jump_positions)
+  }
 }
