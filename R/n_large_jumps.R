@@ -23,32 +23,60 @@
 #' y <- c(rnorm(100), rnorm(mean=50, n=100))
 #' n_large_jumps(y)
 #' @export
-n_large_jumps <- function(y) {
+
+#' Detect Large Jumps Automatically
+#'
+#' Detects unusually large changes in a time series using an
+#' automatically estimated threshold.
+#'
+#' @param y A numeric vector of time series observations.
+#'
+#' @return A list containing the estimated threshold, jump positions,
+#'   and number of detected jumps. Positions refer to the observation
+#'   immediately after each detected jump.
+#'
+#' @examples
+#' y1 <- c(10, 11, 12, 13, 14, 25, 26)
+#' detect_jumps(y1)
+#' 
+#' y2 <- c(rnorm(100), rnorm(mean=50, n=100))
+#' detect_jumps(y2)
+#' n <- length(y2)
+#' t <- 1:n
+#' plot(y2~t, type="l")
+#' @export
+detect_jumps <- function(y) {
   if (!is.numeric(y) || length(y) < 3 ||
       anyNA(y) || any(!is.finite(y))) {
-    return(NA_integer_)
+    stop("y must be a finite numeric vector of length at least 3.")
   }
   
-  d <- diff(y)
-  deviations <- abs(d - stats::median(d))
+  deviations <- abs(diff(y))
+ # deviations <- abs(d - stats::median(d))
   
-  q1 <- stats::quantile(deviations, 0.25, names = FALSE)
+ # q1 <- stats::quantile(deviations, 0.25, names = FALSE)
   q3 <- stats::quantile(deviations, 0.75, names = FALSE)
   iqr_dev <- q3 - q1
   
-  # Automatic Tukey upper fence
   threshold <- q3 + 1.5 * iqr_dev
   
-  # Fallback when the IQR is zero
+  # Handle zero-IQR cases
   if (iqr_dev == 0) {
     positive_dev <- deviations[deviations > 0]
     
     if (length(positive_dev) == 0) {
-      return(0L)
+      jump_positions <- integer(0)
+    } else {
+      threshold <- min(positive_dev) / 2
+      jump_positions <- which(deviations > threshold)
     }
-    
-    threshold <- stats::median(positive_dev)
+  } else {
+    jump_positions <- which(deviations > threshold)
   }
   
-  as.integer(sum(deviations > threshold))
+  list(
+    threshold = threshold,
+    jump_positions = jump_positions + 1L,
+    n_jumps = length(jump_positions)
+  )
 }
