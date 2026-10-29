@@ -25,9 +25,11 @@ Imports:
     lubridate,
     purrr,
     tidyr,
-    rlang
+    rlang,
+    mgcv
 Suggests:
     testthat (>= 3.0.0),
-    tsibble
+    tsibble,
+    changepoint
 Config/testthat/edition: 3
 LazyData: true
