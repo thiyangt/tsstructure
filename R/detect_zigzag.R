@@ -1,4 +1,3 @@
-
 #' Detect Zig-Zag Patterns in a Time Series
 #'
 #' Identifies direction reversals in a time series by examining the
@@ -31,7 +30,7 @@
 #' detect_zigzag(y)
 #'
 #' @export
-detect_zigzag <- function(y, min_reversals = 3, detailed=TRUE) {
+detect_zigzag <- function(y, min_reversals = 3, detailed=FALSE) {
   if (!is.numeric(y) || length(y) < 3 ||
       anyNA(y) || any(!is.finite(y))) {
     stop("y must be a finite numeric vector of length at least 3.")
@@ -71,7 +70,7 @@ detect_zigzag <- function(y, min_reversals = 3, detailed=TRUE) {
   n_reversals <- length(reversals)
   zigzag_rate <- n_reversals / (length(d_nonzero) - 1L)
   
-  if (detailed=TRUE){
+  if (detailed == TRUE){
   
   list(
     is_zigzag = n_reversals >= min_reversals,

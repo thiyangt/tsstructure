@@ -2,56 +2,27 @@
 % Please edit documentation in R/randomness_ratio_loess.R
 \name{randomness_ratio_loess}
 \alias{randomness_ratio_loess}
-\title{Calculate the Randomness Ratio of a Time Series}
+\title{Randomness Ratio Based on LOESS}
 \usage{
-randomness_ratio_loess(y, k = 10)
+randomness_ratio_loess(y, plot = FALSE)
 }
 \arguments{
-\item{y}{A numeric vector containing the time series observations.}
+\item{y}{A numeric time series.}
 
-\item{k}{An integer specifying the basis dimension for the smooth term.
-The default is 10. Larger values allow more complex fitted shapes,
-subject to the smoothing penalty and available data.}
+\item{plot}{Logical; if TRUE, plots the observed series and fitted curve.}
 }
 \value{
-A numeric value representing the randomness ratio:
-\deqn{\frac{\operatorname{Var}(y_t - \hat{f}(t))}
-{\operatorname{Var}(y_t)}}
-where \eqn{\hat{f}(t)} is the fitted smooth function of time.
+A numeric value representing the ratio of residual variance
+to the variance of the original series.
 }
 \description{
-Fits a generalized additive model (GAM) with a smooth function of time
-to capture linear and nonlinear temporal patterns. The randomness ratio
-is calculated as the variance of the residuals divided by the variance
-of the original observations.
-}
-\details{
-A low randomness ratio indicates that a large proportion of the
-variation is explained by the fitted smooth trend. A high ratio
-indicates that more variation remains unexplained by the fitted model.
-
-The function uses \code{\link[mgcv:gam]{mgcv::gam()}} with a penalized smooth term,
-\code{s(t)}, and selects the smoothing parameter using restricted
-maximum likelihood (\code{method = "REML"}).
-
-The ratio is not necessarily bounded by zero and one because the
-residual variance and original variance are calculated separately.
-Its value depends on the smoothness of the fitted model and the
-characteristics of the time series.
+Measures the proportion of variation remaining after fitting a
+locally weighted regression (LOESS) curve to a time series.
 }
 \examples{
 set.seed(123)
 t <- seq_len(200)
-A smooth periodic series with small random noise
 y <- 10 + 3 * sin(2 * pi * t / 50) + rnorm(200, sd = 0.3)
-randomness_ratio(y)
+randomness_ratio_loess(y, plot=TRUE)
 
-
-}
-\references{
-Wood, S. N. (2017). \emph{Generalized Additive Models: An Introduction
-with R} (2nd ed.). Chapman and Hall/CRC.
-}
-\seealso{
-\code{\link[mgcv:gam]{mgcv::gam()}}, \code{\link[mgcv:s]{mgcv::s()}}
 }

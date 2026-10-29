@@ -25,7 +25,7 @@ jump_score_sd <- function(y) {
   sddiffy <- sd(diff(y))
   
   numerator <- mad
-  denominator <- meandiffy
+  denominator <- sddiffy
   
   if (is.na(numerator) || is.na(denominator) ||
       denominator == 0) {
