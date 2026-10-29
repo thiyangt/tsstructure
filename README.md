@@ -8,7 +8,7 @@
 <!-- badges: end -->
 
 The goal of tsstructure is to identify time series with less random
-structures,
+structures.
 
 ## Installation
 

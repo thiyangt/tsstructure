@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of tsstructure is to identify time series with less random structures,
+The goal of tsstructure is to identify time series with less random structures.
 
 ## Installation
 
