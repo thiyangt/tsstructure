@@ -11,14 +11,21 @@
 #'
 #' @examples
 #' y <- c(1, 2, 3, 10, 11)
-#' jump_score(y)
+#' jump_score_sd(y)
 #'
 #' @seealso [max_abs_diff()], [sd_diff()]
 #'
 #' @export
 jump_score_sd <- function(y) {
-  numerator <- max_abs_diff(y)
-  denominator <- sd_diff(y)
+  if (length(y) < 2 || !is.numeric(y) || anyNA(y)) {
+    return(NA_real_)
+  }
+  
+  mad <- max(abs(diff(y)))
+  sddiffy <- sd(diff(y))
+  
+  numerator <- mad
+  denominator <- meandiffy
   
   if (is.na(numerator) || is.na(denominator) ||
       denominator == 0) {
