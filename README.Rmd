@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of tsstructure is to ...
+The goal of tsstructure is to identify time series with less random structures,
 
 ## Installation
 
@@ -62,21 +62,21 @@ t <- 1:n
 
 # Linear
 y_linear <- 10 + 0.05 * t + rnorm(n, 0, 0.3)
-randomness_ratio_gam(y_linear)
-randomness_ratio_loess(y_linear)
+randomness_ratio_gam(y_linear, plot=TRUE)
+randomness_ratio_loess(y_linear, plot=TRUE)
 
 # Nonlinear quadratic
 y_curve <- 10 + 0.002 * (t - 100)^2 + rnorm(n, 0, 0.3)
-randomness_ratio_gam(y_curve)
-randomness_ratio_loess(y_curve)
+randomness_ratio_gam(y_curve, plot=TRUE)
+randomness_ratio_loess(y_curve, plot=TRUE)
 
 # Sine wave
 y_sine <- 10 + 3 * sin(2 * pi * t / 50) + rnorm(n, 0, 0.3)
-randomness_ratio_gam(y_sine)
-randomness_ratio_loess(y_sine)
+randomness_ratio_gam(y_sine, plot=TRUE)
+randomness_ratio_loess(y_sine, plot=TRUE)
 
 # Highly random
 y_random <- 10 + rnorm(n, 0, 3)
-randomness_ratio_gam(y_random)
-randomness_ratio_loess(y_random)
+randomness_ratio_gam(y_random, plot=TRUE)
+randomness_ratio_loess(y_random, plot=TRUE)
 ```

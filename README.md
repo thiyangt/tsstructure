@@ -7,7 +7,8 @@
 
 <!-- badges: end -->
 
-The goal of tsstructure is to …
+The goal of tsstructure is to identify time series with less random
+structures,
 
 ## Installation
 
@@ -37,29 +38,17 @@ t <- seq_len(n)
 y1 <- 10 + 3 * sin(2 * pi * t / 50) +
   rnorm(n, sd = 0.3)
 randomness_ratio_gam(y1)
+#> [1] 0.01682916
+randomness_ratio_loess(y1)
+#> [1] 0.01927312
+
+y2 <- rnorm(200)
+
+randomness_ratio_gam(y2)
+#> [1] 0.9999981
+randomness_ratio_loess(y2)
+#> [1] 0.9365946
 ```
-
-<img src="man/figures/README-example-1.png" alt="" width="100%" />
-
-    #> [1] 0.03313283
-    randomness_ratio_loess(y1)
-
-<img src="man/figures/README-example-2.png" alt="" width="100%" />
-
-    #> [1] 0.9077755
-
-    y2 <- rnorm(200)
-
-    randomness_ratio_gam(y2)
-
-<img src="man/figures/README-example-3.png" alt="" width="100%" />
-
-    #> [1] 0.9967429
-    randomness_ratio_loess(y2)
-
-<img src="man/figures/README-example-4.png" alt="" width="100%" />
-
-    #> [1] 0.9846733
 
 ``` r
 set.seed(123)
@@ -69,53 +58,53 @@ t <- 1:n
 
 # Linear
 y_linear <- 10 + 0.05 * t + rnorm(n, 0, 0.3)
-randomness_ratio_gam(y_linear)
+randomness_ratio_gam(y_linear, plot=TRUE)
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" alt="" width="100%" />
 
     #> [1] 0.00953499
-    randomness_ratio_loess(y_linear)
+    randomness_ratio_loess(y_linear, plot=TRUE)
 
 <img src="man/figures/README-unnamed-chunk-2-2.png" alt="" width="100%" />
 
-    #> [1] 0.009498872
+    #> [1] 0.008856491
 
     # Nonlinear quadratic
     y_curve <- 10 + 0.002 * (t - 100)^2 + rnorm(n, 0, 0.3)
-    randomness_ratio_gam(y_curve)
+    randomness_ratio_gam(y_curve, plot=TRUE)
 
 <img src="man/figures/README-unnamed-chunk-2-3.png" alt="" width="100%" />
 
-    #> [1] 0.002507062
-    randomness_ratio_loess(y_curve)
+    #> [1] 0.8422144
+    randomness_ratio_loess(y_curve, plot=TRUE)
 
 <img src="man/figures/README-unnamed-chunk-2-4.png" alt="" width="100%" />
 
-    #> [1] 0.002470385
+    #> [1] 0.002349764
 
     # Sine wave
     y_sine <- 10 + 3 * sin(2 * pi * t / 50) + rnorm(n, 0, 0.3)
-    randomness_ratio_gam(y_sine)
+    randomness_ratio_gam(y_sine, plot=TRUE)
 
 <img src="man/figures/README-unnamed-chunk-2-5.png" alt="" width="100%" />
 
-    #> [1] 0.03402271
-    randomness_ratio_loess(y_sine)
+    #> [1] 0.01654935
+    randomness_ratio_loess(y_sine, plot=TRUE)
 
 <img src="man/figures/README-unnamed-chunk-2-6.png" alt="" width="100%" />
 
-    #> [1] 0.9097413
+    #> [1] 0.01980613
 
     # Highly random
     y_random <- 10 + rnorm(n, 0, 3)
-    randomness_ratio_gam(y_random)
+    randomness_ratio_gam(y_random, plot=TRUE)
 
 <img src="man/figures/README-unnamed-chunk-2-7.png" alt="" width="100%" />
 
-    #> [1] 0.9891118
-    randomness_ratio_loess(y_random)
+    #> [1] 0.9903451
+    randomness_ratio_loess(y_random, plot=TRUE)
 
 <img src="man/figures/README-unnamed-chunk-2-8.png" alt="" width="100%" />
 
-    #> [1] 0.9654004
+    #> [1] 0.8957747
