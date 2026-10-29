@@ -25,7 +25,7 @@ to each time series in a list.
 series <- list(
   linear = 1:20,
   rand = rnorm(100),
-  zigzag = c(1, 5, 2, 6, 3, 7, 4),
+  zigzag = c(1, 5, 2, 6, 3, 7, 4, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5,6),
   seasonal = sin(2 * pi * (1:100) / 12)
 )
 
