@@ -13,6 +13,7 @@
 #' @param k An integer specifying the basis dimension for the smooth term.
 #'   The default is 10. Larger values allow more complex fitted shapes,
 #'   subject to the smoothing penalty and available data.
+#' @param plot TRUE or FALSE indicating whether we need to output plot or not.
 #'
 #' @return A numeric value representing the randomness ratio:
 #' \deqn{\frac{\operatorname{Var}(y_t - \hat{f}(t))}
@@ -45,7 +46,7 @@
 #'
 #' @importFrom mgcv gam
 #' @export
-randomness_ratio <- function(y, k = 10) {
+randomness_ratio_gam <- function(y, k = 10, plot=TRUE) {
   n <- length(y)
   t <- seq_len(n)
   
@@ -55,6 +56,18 @@ randomness_ratio <- function(y, k = 10) {
   fitted_values <- predict(fit)
   remainder <- y - fitted_values
   
+  if(plot==TRUE){
+  # Compare fitted curves
+  plot(t, y, type = "l", col = "grey70",
+       main = "Actual versus GAM",
+       xlab = "Time", ylab = "Value")
+  
+  lines(t, fitted_values, col = "blue", lwd = 2)
+ # lines(t, pred_gam, col = "red", lwd = 2)
+  }
+
+  
   var(remainder) / var(y)
+  
 }
 
