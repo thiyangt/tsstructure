@@ -9,7 +9,7 @@ Authors@R:
       role = c("aut", "cre"),
       comment = c(ORCID = "0000-0002-0656-9789")
     )
-Description: 
+Description: Features to identify series with level shifts, zig-zag patterns and sine-wave patterns
 License: GPL (>= 3)
 Encoding: UTF-8
 Depends:
@@ -19,13 +19,6 @@ RoxygenNote: 7.3.3
 URL: https://github.com/thiyangt/tsstructure, https://thiyangt.github.io/tsstructure/
 BugReports: https://github.com/thiyangt/tsstructure/issues
 Imports:
-    ggplot2,
-    dplyr,
-    tibble,
-    lubridate,
-    purrr,
-    tidyr,
-    rlang,
     mgcv
 Suggests:
     testthat (>= 3.0.0),

@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' y1 <- c(10, 11, 12, 13, 14, 25, 26)
-#' detect_jumps(y1)
+#' detect_jumps_all(y1)
 #' 
 #' y2 <- c(rnorm(100), rnorm(mean=3, n=100))
 #' detect_jumps_all(y2)
