@@ -81,8 +81,7 @@ immediately after each detected jump otherwise only number o jumps.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">11</span>, <span class="fl">12</span>, <span class="fl">13</span>, <span class="fl">14</span>, <span class="fl">25</span>, <span class="fl">26</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">detect_jumps</span><span class="op">(</span><span class="va">y1</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in detect_jumps(y1):</span> could not find function "detect_jumps"</span>
+<span class="r-in"><span><span class="fu">detect_jumps_all</span><span class="op">(</span><span class="va">y1</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span>mean<span class="op">=</span><span class="fl">3</span>, n<span class="op">=</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">detect_jumps_all</span><span class="op">(</span><span class="va">y2</span><span class="op">)</span></span></span>
