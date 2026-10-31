@@ -21,8 +21,8 @@ jump_score_mean <- function(y) {
     return(NA_real_)
   }
   
-  mad <- max(abs(diff(y)))
-  meandiffy <- mean(diff(y))
+  mad <- max(abs(diff(y)), na.rm=TRUE)
+  meandiffy <- mean(diff(y), na.rm=TRUE)
   
   numerator <- mad
   denominator <- meandiffy

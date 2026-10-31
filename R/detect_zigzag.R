@@ -30,7 +30,8 @@
 #' detect_zigzag(y)
 #'
 #' @export
-detect_zigzag <- function(y, min_reversals = 3, detailed=FALSE) {
+detect_zigzag <- function(y, min_reversals = 3, detailed = FALSE) {
+  
   if (!is.numeric(y) || length(y) < 3 ||
       anyNA(y) || any(!is.finite(y))) {
     stop("y must be a finite numeric vector of length at least 3.")
@@ -45,17 +46,23 @@ detect_zigzag <- function(y, min_reversals = 3, detailed=FALSE) {
   
   d <- diff(y)
   
-  # Remove zero differences while retaining their original locations
+  # Remove zero differences
   nonzero_idx <- which(d != 0)
   d_nonzero <- d[nonzero_idx]
   
+  # Not enough non-zero differences
   if (length(d_nonzero) < 2) {
-    return(list(
-      is_zigzag = FALSE,
-      n_reversals = 0L,
-      zigzag_rate = 0,
-      reversal_positions = integer(0)
-    ))
+    
+    if (detailed) {
+      return(list(
+        is_zigzag = FALSE,
+        n_reversals = 0L,
+        zigzag_rate = 0,
+        reversal_positions = integer(0)
+      ))
+    } else {
+      return(0)
+    }
   }
   
   # Identify changes in direction
@@ -63,22 +70,25 @@ detect_zigzag <- function(y, min_reversals = 3, detailed=FALSE) {
     sign(d_nonzero[-1]) != sign(d_nonzero[-length(d_nonzero)])
   )
   
-  # Map reversals back to original observation positions.
-  # A reversal lies at the turning observation between two differences.
+  # Map reversals to observation positions
   reversal_positions <- nonzero_idx[reversals] + 1L
   
   n_reversals <- length(reversals)
+  
   zigzag_rate <- n_reversals / (length(d_nonzero) - 1L)
   
-  if (detailed == TRUE){
-  
-  list(
-    is_zigzag = n_reversals >= min_reversals,
-    n_reversals = n_reversals,
-    zigzag_rate = zigzag_rate,
-    reversal_positions = reversal_positions
-  )
+  if (detailed) {
+    
+    return(list(
+      is_zigzag = n_reversals >= min_reversals,
+      n_reversals = n_reversals,
+      zigzag_rate = zigzag_rate,
+      reversal_positions = reversal_positions
+    ))
+    
   } else {
-    zigzag_rate
+    
+    return(zigzag_rate)
+    
   }
 }

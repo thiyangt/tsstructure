@@ -21,8 +21,8 @@ jump_score_sd <- function(y) {
     return(NA_real_)
   }
   
-  mad <- max(abs(diff(y)))
-  sddiffy <- sd(diff(y))
+  mad <- max(abs(diff(y)), na.rm=TRUE)
+  sddiffy <- sd(diff(y), na.rm=TRUE)
   
   numerator <- mad
   denominator <- sddiffy

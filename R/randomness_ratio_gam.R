@@ -19,11 +19,41 @@ randomness_ratio_gam <- function(y, plot = FALSE) {
   n <- length(y)
   t <- seq_len(n)
   
-  if (n < 20)
-    stop("`y` must contain at least 20 observations.")
+  if (stats::var(y) == 0)
+    return(0)
+  
+  n <- length(y)
+  t <- seq_len(n)
+  
+  if (n < 3)
+    stop("`y` must contain at least 3 observations.")
   
   if (stats::var(y) == 0)
     return(0)
+  
+  # ------------------------------------------------------------
+  # Short series: use a simple first-difference S/N measure
+  # ------------------------------------------------------------
+  if (n < 20) {
+    
+    dy <- diff(y)
+    
+    # Estimate noise variance from successive differences
+    noise_variance <- stats::var(dy) / 2
+    
+    ratio <- noise_variance / stats::var(y)
+    
+    # Keep the measure in [0, 1]
+    ratio <- min(max(ratio, 0), 1)
+    
+    if (plot) {
+      plot(t, y, type = "b",
+           main = "Short-series randomness",
+           xlab = "Time", ylab = "Value")
+    }
+    
+    return(ratio)
+  }
   
   # Detect a candidate period using the ACF
   acf_values <- as.numeric(
